@@ -14,6 +14,29 @@ numberButtons.forEach((button) => {
 	})
 });
 
+const operatorButtons = buttons.querySelectorAll(".operator");
+operatorButtons.forEach((button) => {
+	button.addEventListener("click", (e) => {
+		memory = current;
+		current = 0;
+		operator = e.target.textContent;
+	})
+});
+
+const calculateButton = buttons.querySelector("#calculate");
+calculateButton.addEventListener("click", () => {
+	current = operate();
+	display.textContent = current;
+});
+
+const clearButton = buttons.querySelector("#clear");
+clearButton.addEventListener("click", () => {
+	current = 0;
+	memory = 0;
+	operator = "";
+	display.textContent = current;
+});
+
 function add(a, b) {
 	return a + b;
 }
@@ -30,18 +53,22 @@ function divide(a, b) {
 	return a / b;
 }
 
-function operate(operator, number) {
+function operate() {
+	memory = Number(memory);
+	current = Number(current);
 	switch(operator) {
-		case add:
-			return add(current, number);
-		case subtract:
-			return subtract(current, number);
-		case multiply:
-			return multiply(current, number);
-		case divide:
-			return divide(current, number);
+		case "+":
+			return add(memory, current);
+		case "−":
+			return subtract(memory, current);
+		case "×":
+			return multiply(memory, current);
+		case "÷":
+			return divide(memory, current);
 	}
 }
 
 let current = 0;
+let memory = 0;
+let operator = "";
 display.textContent = current;
