@@ -1,18 +1,30 @@
-function add(number) {
-	return current = current + number;
+function add(a, b) {
+	return a + b;
 }
 
-function subtract(number) {
-	return current = current - number;
+function subtract(a, b) {
+	return a - b;
 }
 
-function multiply(number) {
-	return current = current * number;
+function multiply(a, b) {
+	return a * b;
 }
 
-function divide(number) {
-	return current = current / number;
+function divide(a, b) {
+	return a / b;
+}
+
+function operate(operator, number) {
+	switch(operator) {
+		case add:
+			return add(current, number);
+		case subtract:
+			return subtract(current, number);
+		case multiply:
+			return multiply(current, number);
+		case divide:
+			return divide(current, number);
+	}
 }
 
 let current = 0;
-console.log(current);
