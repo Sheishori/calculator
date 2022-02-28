@@ -25,8 +25,7 @@ operatorButtons.forEach((button) => {
 
 const calculateButton = buttons.querySelector("#calculate");
 calculateButton.addEventListener("click", () => {
-	current = operate();
-	display.textContent = current;
+	if (operator) display.textContent = operate();
 });
 
 const clearButton = buttons.querySelector("#clear");
@@ -58,13 +57,13 @@ function operate() {
 	current = Number(current);
 	switch(operator) {
 		case "+":
-			return add(memory, current);
+			return current = add(memory, current);
 		case "−":
-			return subtract(memory, current);
+			return current = subtract(memory, current);
 		case "×":
-			return multiply(memory, current);
+			return current = multiply(memory, current);
 		case "÷":
-			return divide(memory, current);
+			return current = divide(memory, current);
 	}
 }
 
