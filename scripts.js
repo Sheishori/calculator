@@ -7,6 +7,9 @@ numberButtons.forEach((button) => {
 		if (current === 0) {
 			current = e.target.textContent;
 			display.textContent = current;
+		} else if (operator) {
+			operatingValue += e.target.textContent;
+			display.textContent = operatingValue;
 		} else {
 			current += e.target.textContent;
 			display.textContent = current;
@@ -17,24 +20,28 @@ numberButtons.forEach((button) => {
 const operatorButtons = buttons.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
-		memory = current;
-		current = 0;
+		if (operator && endChain === false) display.textContent = operate();
+		operatingValue = "";
 		operator = e.target.textContent;
 	})
 });
 
 const calculateButton = buttons.querySelector("#calculate");
 calculateButton.addEventListener("click", () => {
+	endChain = true;
 	if (operator) display.textContent = operate();
 });
 
-const clearButton = buttons.querySelector("#clear");
-clearButton.addEventListener("click", () => {
+function clear() {
 	current = 0;
-	memory = 0;
+	operatingValue = "";
 	operator = "";
+	endChain = false;
 	display.textContent = current;
-});
+}
+
+const clearButton = buttons.querySelector("#clear");
+clearButton.addEventListener("click", clear);
 
 function add(a, b) {
 	return a + b;
@@ -53,21 +60,22 @@ function divide(a, b) {
 }
 
 function operate() {
-	memory = Number(memory);
 	current = Number(current);
+	operatingValue = Number(operatingValue);
 	switch(operator) {
 		case "+":
-			return current = add(memory, current);
+			return current = add(current, operatingValue);
 		case "−":
-			return current = subtract(memory, current);
+			return current = subtract(current, operatingValue);
 		case "×":
-			return current = multiply(memory, current);
+			return current = multiply(current, operatingValue);
 		case "÷":
-			return current = divide(memory, current);
+			return current = divide(current, operatingValue);
 	}
 }
 
 let current = 0;
-let memory = 0;
+let operatingValue = "";
 let operator = "";
+let endChain = false;
 display.textContent = current;
