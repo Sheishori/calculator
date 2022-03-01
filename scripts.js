@@ -61,6 +61,13 @@ function clear() {
 const clearButton = buttons.querySelector("#clear");
 clearButton.addEventListener("click", clear);
 
+const clearElementButton = buttons.querySelector("#clear-element");
+clearElementButton.addEventListener("click", () => {
+	displayValue = display.textContent.slice(0, -1);
+	if (displayValue === "") displayValue = 0;
+	display.textContent = displayValue;
+});
+
 function add(a, b) {
 	return a + b;
 }
