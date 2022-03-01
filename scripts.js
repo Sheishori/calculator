@@ -46,8 +46,9 @@ signButton.addEventListener("click", () => {
 const operatorButtons = buttons.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
-		if (operator === "" || endChain === true) memory = displayValue;
+		if (operator === "") memory = displayValue;
 		if (operator && endChain === false) display.textContent = operate();
+		endChain = false;
 		decimalButton.disabled = false;
 		operator = e.target.textContent;
 		displayValue = 0;
