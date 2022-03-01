@@ -17,10 +17,18 @@ numberButtons.forEach((button) => {
 	})
 });
 
+const decimalButton = buttons.querySelector(".decimal");
+decimalButton.addEventListener("click", (e) => {
+	if (operator) operatingValue += e.target.textContent;
+	else current += e.target.textContent;
+	decimalButton.disabled = true;
+});
+
 const operatorButtons = buttons.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
 		if (operator && endChain === false) display.textContent = operate();
+		decimalButton.disabled = false;
 		operatingValue = "";
 		operator = e.target.textContent;
 	})
@@ -37,6 +45,7 @@ function clear() {
 	operatingValue = "";
 	operator = "";
 	endChain = false;
+	decimalButton.disabled = false;
 	display.textContent = current;
 }
 
@@ -64,13 +73,14 @@ function operate() {
 	operatingValue = Number(operatingValue);
 	switch(operator) {
 		case "+":
-			return current = add(current, operatingValue);
+			return current = Number(add(current, operatingValue).toFixed(6));
 		case "−":
-			return current = subtract(current, operatingValue);
+			return current = Number(subtract(current, operatingValue).toFixed(6));
 		case "×":
-			return current = multiply(current, operatingValue);
+			return current = Number(multiply(current, operatingValue).toFixed(6));
 		case "÷":
-			return current = divide(current, operatingValue);
+			if (operatingValue === 0) return current = "You want to end the world?"
+			return current = Number(divide(current, operatingValue).toFixed(6));
 	}
 }
 
