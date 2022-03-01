@@ -40,6 +40,7 @@ signButton.addEventListener("click", () => {
 			displayValue = "-" + display.textContent;
 			display.textContent = displayValue;
 		}
+		if (operator) memory = displayValue;
 	}
 });
 
