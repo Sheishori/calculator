@@ -4,6 +4,7 @@ const buttons = calculator.querySelector("#buttons");
 const numberButtons = buttons.querySelectorAll(".number");
 numberButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
+		if (endChain === true) clear();
 		if (displayValue === 0) {
 			displayValue = e.target.textContent;
 			display.textContent = displayValue;
