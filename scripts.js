@@ -4,33 +4,30 @@ const buttons = calculator.querySelector("#buttons");
 const numberButtons = buttons.querySelectorAll(".number");
 numberButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
-		if (current === 0) {
-			current = e.target.textContent;
-			display.textContent = current;
-		} else if (operator) {
-			operatingValue += e.target.textContent;
-			display.textContent = operatingValue;
+		if (displayValue === 0) {
+			displayValue = e.target.textContent;
+			display.textContent = displayValue;
 		} else {
-			current += e.target.textContent;
-			display.textContent = current;
+			displayValue += e.target.textContent;
+			display.textContent = displayValue;
 		}
 	})
 });
 
 const decimalButton = buttons.querySelector(".decimal");
 decimalButton.addEventListener("click", (e) => {
-	if (operator) operatingValue += e.target.textContent;
-	else current += e.target.textContent;
+	displayValue += e.target.textContent;
 	decimalButton.disabled = true;
 });
 
 const operatorButtons = buttons.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
+		if (operator === "") memory = displayValue;
 		if (operator && endChain === false) display.textContent = operate();
 		decimalButton.disabled = false;
-		operatingValue = "";
 		operator = e.target.textContent;
+		displayValue = 0;
 	})
 });
 
@@ -41,12 +38,11 @@ calculateButton.addEventListener("click", () => {
 });
 
 function clear() {
-	current = 0;
-	operatingValue = "";
+	displayValue = 0;
 	operator = "";
 	endChain = false;
 	decimalButton.disabled = false;
-	display.textContent = current;
+	display.textContent = displayValue;
 }
 
 const clearButton = buttons.querySelector("#clear");
@@ -69,23 +65,23 @@ function divide(a, b) {
 }
 
 function operate() {
-	current = Number(current);
-	operatingValue = Number(operatingValue);
+	memory = Number(memory);
+	displayValue = Number(displayValue);
 	switch(operator) {
 		case "+":
-			return current = Number(add(current, operatingValue).toFixed(6));
+			return memory = Number(add(memory, displayValue).toFixed(6));
 		case "−":
-			return current = Number(subtract(current, operatingValue).toFixed(6));
+			return memory = Number(subtract(memory, displayValue).toFixed(6));
 		case "×":
-			return current = Number(multiply(current, operatingValue).toFixed(6));
+			return memory = Number(multiply(memory, displayValue).toFixed(6));
 		case "÷":
-			if (operatingValue === 0) return current = "You want to end the world?"
-			return current = Number(divide(current, operatingValue).toFixed(6));
+			if (displayValue === 0) return memory = "You want to end the world?"
+			return memory = Number(divide(memory, displayValue).toFixed(6));
 	}
 }
 
-let current = 0;
-let operatingValue = "";
+let displayValue = 0;
+let memory = 0;
 let operator = "";
 let endChain = false;
-display.textContent = current;
+display.textContent = displayValue;
