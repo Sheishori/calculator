@@ -22,6 +22,7 @@ window.addEventListener("keydown", (e) => {
 			button.click();
 		}
 	})
+	if (e.key === "Backspace") clearElementButton.click();
 });
 
 const decimalButton = buttons.querySelector(".decimal");
