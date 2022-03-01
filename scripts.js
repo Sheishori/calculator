@@ -20,10 +20,23 @@ decimalButton.addEventListener("click", (e) => {
 	decimalButton.disabled = true;
 });
 
+const signButton = buttons.querySelector(".change-sign");
+signButton.addEventListener("click", () => {
+	if (display.textContent !== "0"){
+		if (display.textContent.toString().startsWith("-")) {
+			displayValue = display.textContent.slice(1);
+			display.textContent = displayValue;
+		} else {
+			displayValue = "-" + display.textContent;
+			display.textContent = displayValue;
+		}
+	}
+});
+
 const operatorButtons = buttons.querySelectorAll(".operator");
 operatorButtons.forEach((button) => {
 	button.addEventListener("click", (e) => {
-		if (operator === "") memory = displayValue;
+		if (operator === "" || endChain === true) memory = displayValue;
 		if (operator && endChain === false) display.textContent = operate();
 		decimalButton.disabled = false;
 		operator = e.target.textContent;
