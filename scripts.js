@@ -15,6 +15,15 @@ numberButtons.forEach((button) => {
 	})
 });
 
+window.addEventListener("keydown", (e) => {
+	const calcButtons = Array.from(buttons.querySelectorAll("button"));
+	calcButtons.find(button => {
+		if (button.textContent === e.key) {
+			button.click();
+		}
+	})
+});
+
 const decimalButton = buttons.querySelector(".decimal");
 decimalButton.addEventListener("click", (e) => {
 	displayValue += e.target.textContent;
