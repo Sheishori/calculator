@@ -68,6 +68,12 @@ clearElementButton.addEventListener("click", () => {
 	display.textContent = displayValue;
 });
 
+const percentButton = buttons.querySelector(".percent");
+percentButton.addEventListener("click", () => {
+	displayValue = Number(Number(display.textContent).toFixed(6)/100);
+	display.textContent = displayValue;
+});
+
 function add(a, b) {
 	return a + b;
 }
