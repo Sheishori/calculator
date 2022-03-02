@@ -28,6 +28,7 @@ window.addEventListener("keydown", (e) => {
 const decimalButton = buttons.querySelector(".decimal");
 decimalButton.addEventListener("click", (e) => {
 	displayValue += e.target.textContent;
+	display.textContent = displayValue;
 	decimalButton.disabled = true;
 });
 

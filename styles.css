@@ -34,6 +34,7 @@ body {
 	width: 240px;
 	height: 70px;
 	padding-right: 6px;
+	overflow:hidden;
 	display: flex;
 	justify-content: end;
 	align-items: center;
